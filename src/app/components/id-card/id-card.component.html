@@ -1,0 +1,71 @@
+
+
+  <ng-container *ngIf="visible">
+  <div   id="report" >
+ 
+	<div class="id-card-tag-strip"></div>
+	<div class="id-card-hook"></div>
+	<div class="id-card-holder">
+		<div class="id-card">
+			<div class="header">
+				<img src="assets/school.png" style="width: 30px; height: 60px;"> <h6><b>{{orgname}}</b></h6>  
+        
+			</div>
+			<div class="photo">
+				<img id="stu.studentId" src="assets/{{student.studentId}}.jpg">
+			</div>
+			<h2><b>{{student.name}} ({{student.bloodGroup}})</b></h2>
+			<div class="qr-code">
+        <table ><tr><td><b>Class</b></td><td>{{className.className}}</td></tr>
+          <tr><td><b>Phone</b></td><td>{{student.contact1}}</td></tr>
+          <tr><td><b>Address</b></td><td>{{student.currentAddress}}</td></tr>
+          
+        </table>
+        
+				
+			</div>
+			
+			<hr>
+			<p>Address : {{orgaddress}}</p>
+			<p>Email :{{orgemail}} &nbsp;   Contact : {{contact}},{{contact2}}</p>
+
+		</div>
+	</div>
+  </div>
+</ng-container>
+    <ng-container>
+      
+       
+        
+       
+      <form  [formGroup]="searchForm"  style="padding: 30px;">
+       
+        
+        <div style="padding: 10px;"><b>Generate student Id Card.</b></div>
+          <label><b><span style="color:red;">*</span></b>Session</label>
+          <select   id="ssession" [(ngModel)]="searchData.sessionId"  formControlName="ssession">
+            <option [ngValue]="0">Select Session</option>
+            <option *ngFor="let session of activeSessions" [ngValue]="session.sessionId">{{ session.sessionName }}
+            </option>
+          </select> &nbsp; &nbsp;&nbsp;
+          <label><b><span style="color:red;">*</span></b>Class</label>
+          <select   id="sclass" [(ngModel)]="searchData.classId"  formControlName="sclass" id="classId" (change)='studentList()' >
+            <option [ngValue]="0">Select class</option>
+            <option *ngFor="let class of activeClasses" [ngValue]="class.classId">{{ class.className }}
+            </option>
+          </select>&nbsp; &nbsp;
+             
+              <label><b><span style="color:red;">*</span></b>Student </label>
+              <select   id="studentId" [(ngModel)]="searchData.studentId"  formControlName="studentId" (change)="character()">
+                  <option [ngValue]="0">Select Student</option>
+                  <option *ngFor="let stu of students" [ngValue]="stu.studentId">{{ stu.name }}-{{ stu.dob }} -{{ stu.adhar }}
+                  </option>
+                </select>&nbsp; &nbsp; &nbsp;
+                <button *ngIf="visible" class="btn btn-secondary" (click)="reportPDF()">PDF</button>
+                &nbsp;&nbsp;<button class="btn btn-secondary" (click)="clear()">Clear</button>
+            </form>
+             
+    </ng-container>
+    
+    
+    

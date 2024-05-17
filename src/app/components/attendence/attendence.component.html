@@ -1,0 +1,59 @@
+<div style="padding: 10px;"><b>Attendence register.</b></div>
+<div style="padding: 10px;">
+    
+    <ng-container >
+      <form  [formGroup]="searchForm" (ngSubmit)="onSearch()">
+          <label><b>Class  </b></label>
+          <select   id="sclass" [(ngModel)]="searchData.classId"  formControlName="sclass">
+            <option [ngValue]="0">Select class</option>
+            <option *ngFor="let class of activeClasses" [ngValue]="class.classId">{{ class.className }}
+            </option>
+          </select>&nbsp; &nbsp;
+          <label><b>Attendence Date  </b></label>
+          <input type="date" placeholder= "dd-mm-yyyy" [(ngModel)]="searchData.attendenceDate" formControlName="attendenceDate">
+         <!-- <label><b>Session  </b></label>
+          <select   id="sclass" [(ngModel)]="searchData.sessionId"  formControlName="sclass">
+            <option [ngValue]="0">Select Session</option>
+            <option *ngFor="let session of activeSessions" [ngValue]="session.sessionId">{{ session.sessionName }}
+            </option>
+          </select> &nbsp; &nbsp;&nbsp;--> &nbsp;
+          <button class="btn btn-secondary">Open</button>&nbsp;&nbsp;<button class="btn btn-secondary" (click)="clear()">Clear</button>
+      </form>
+    </ng-container>
+    
+    
+    
+    
+    </div>
+     <div  class="body" *ngIf="students.length>0">
+      
+    <table>
+    <thead>
+     
+      
+      <tr>
+        <th>S.No</th>
+        <th>Name</th>
+        <th>Father Name</th>
+        <th>Contact</th>
+        <th>is Present <input type="checkbox" id="checkAll" ng-model="all" (change)="checked()"></th>
+      </tr>
+      </thead>
+     
+      <tbody>
+      <tr  ng-template *ngFor="let stu of students; let i = index ">
+
+        <td>{{i+1}}</td>
+        <td>{{stu.name}}</td>
+        <td>{{stu.fatherName}}</td>
+        <td>{{stu.contact1}}</td>
+        <td>  <input type="checkbox" id="{{i}}" [checked]="stu.attendence.isPresent" ></td>
+        
+      </tr>
+     </tbody>
+    
+    </table>
+ <button class="btn btn-secondary" (click)="saveAttendence(students)">Save</button>
+
+    </div>
+    

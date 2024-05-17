@@ -1,0 +1,158 @@
+<div class="header-fix"><h6>Employee -> Employee Detail</h6></div>
+<div>
+    
+<ng-container *ngIf="! visible">
+  <div class="add-new-button"><button class="btn btn-secondary" (click)="addNewStudent()">Add New</button></div>
+  <form  [formGroup]="searchForm" (ngSubmit)="onSearch()">
+    <label> Name </label>
+    <input type="text" id="sname"[(ngModel)]="searchData.name"  formControlName="sname">&nbsp; &nbsp;
+    
+      <label>Post </label>
+      <select   id="spost" [(ngModel)]="searchData.classId"  formControlName="spost">
+        <option [ngValue]="0">Select Post</option>
+        <option *ngFor="let post of activePosts" [ngValue]="post.postId">{{ post.postName }}
+        </option>
+      </select>&nbsp; &nbsp;
+      
+      <button class="btn btn-secondary">Filter</button>
+  </form>
+</ng-container>
+
+<ng-container *ngIf="visible">
+  
+  
+    <div class="container mt-5 add-margin">
+        <form novalidate [formGroup]="myForm" (ngSubmit)="onSubmit()">
+          <div class="form-group" style="text-align: center;">
+            <label><b>Required  Post, name ,father name,mother name,gender,adhar,DOB.</b></label>
+            <input type="hidden"  id="empId"  [(ngModel)]="employeeData.empId" formControlName="empId">
+            
+               </div> 
+          <div class="form-group mb-3">
+            
+          <select class="form-control"   id="post" [(ngModel)]="employeeData.postId"  formControlName="post">
+            <option [ngValue]="0">Select Post</option>
+            <option *ngFor="let post of activePosts" [ngValue]="post.postId">{{ post.postName }} </option>
+            
+            <!--<option *ngFor="let hoby of Hobbies" [value]="hoby">{{hoby}}</option>-->
+          </select>
+          
+            
+          <div class="form-group mb-3">
+            <label><b><span style="color:red;">*</span></b>Name</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="employeeData.name"  maxlength="40" formControlName="name"/>
+          </div>
+          <div class="form-group mb-3">
+            <label><b><span style="color:red;">*</span></b>Father Name</label>
+            <input type="text" class="form-control" id="fatherName" [(ngModel)]="employeeData.fatherName" maxlength="40" formControlName="fatherName"/>
+          </div>
+          
+          <div class="form-group mb-3">
+            <label><b><span style="color:red;">*</span></b>Gender</label>
+            <select class="form-control"  id="gender" [(ngModel)]="employeeData.gender"  formControlName="gender">
+                <option value="">Select an option</option>
+                <option >Male</option>
+                <option >Female</option>
+                <option >Transgender</option>
+               
+              </select>
+           
+          </div>
+          <div class="form-group mb-3">
+            <label><b><span style="color:red;">*</span></b>Student Adhar</label>
+            <input type="number" onKeyPress="if(this.value.length==12) return false;"   class="form-control" id="adhar" [(ngModel)]="employeeData.adhar"  formControlName="adhar"/>
+          </div>
+         
+          <div class="form-group mb-3">
+            <label><b><span style="color:red;">*</span></b>Date of Birth</label>
+            <input type="date" maxLength="10" placeholder= "dd-mm-yyyy" class="form-control" id="dob" [(ngModel)]="employeeData.dob"  formControlName="dob"/>
+            </div>
+          <div class="form-group mb-3">
+            <label><b><span style="color:red;">*</span></b>Current Address</label>
+            <input type="text" class="form-control"  id="currentAddress" [(ngModel)]="employeeData.currentAddress"  formControlName="currentAddress"/>
+          </div>
+          <div class="form-group mb-3">
+            <label>Permanent Address</label>
+            <input type="text" class="form-control"  id="permanentAddress" [(ngModel)]="employeeData.permanentAddress"  formControlName="permanentAddress"/>
+          </div>
+          <div class="form-group mb-3">
+            <label><b><span style="color:red;">*</span></b>Contact 1</label>
+            <input type="number" onKeyPress="if(this.value.length==10) return false;" class="form-control"  id="contact1" [(ngModel)]="employeeData.contact1"  formControlName="contact1"/>
+          </div>
+          <div class="form-group mb-3">
+            <label>Contact 2</label>
+            <input type="number" onKeyPress="if(this.value.length==10) return false;" class="form-control"  id="contact2" [(ngModel)]="employeeData.contact2"  formControlName="contact2"/>
+          </div>
+          <div class="form-group mb-3">
+            <label><b><span style="color:red;">*</span></b>Blood Goup</label>
+            <select class="form-control"  id="bloodGroup" [(ngModel)]="employeeData.bloodGroup"  formControlName="bloodGroup">
+                <option value="">Select an option</option>
+                <option >(A+)</option>
+                <option >(A-)</option>
+                <option >(B+)</option>
+                <option >(B-)</option>
+                <option >(O+)</option>
+                <option >(O-)</option>
+                <option >(AB+)</option>
+                <option >(AB-)</option>
+                <!--<option *ngFor="let hoby of Hobbies" [value]="hoby">{{hoby}}</option>-->
+              </select>
+           
+          </div>
+          <div class="form-group mb-3">
+            <label>Join Date</label>
+            <input type="date" [maxLength]="10" placeholder= "dd-mm-yyyy" class="form-control" id="joinDate" [(ngModel)]="employeeData.joinDate"  formControlName="joinDate"/>
+            </div>
+
+            <div class="form-group mb-3">
+              <label>Relieve Date</label>
+              <input type="date" [maxLength]="10" placeholder= "dd-mm-yyyy" class="form-control" id="relieveDate" [(ngModel)]="employeeData.releavingDate"  formControlName="relieveDate"/>
+              </div>
+            
+          <div class="form-group mb-3">
+            <label>Active</label>
+            <input type="checkbox"    id="isActive" [(ngModel)]="employeeData.isActive"  formControlName="isActive"/>
+          </div>
+          <div class="form-group mb-3">
+            <button class="btn btn-secondary">Submit</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-secondary" (click)="closeForm()">Close</button>
+          </div>
+       
+      </div>
+        </form>
+</div>
+</ng-container>
+</div>
+ <div  class="body">
+<table>
+<thead>
+  <tr>
+    <th>S.No</th>
+    <th>Name(BOB)-Adhar(BloodGroup)</th>
+    <th>Father Name</th>
+    <th>Address</th>
+    <th>Contact</th>
+    <th>Post</th>
+    <th>Job Period</th>   
+    <th>Active</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+ 
+  <tbody>
+  <tr  ng-template *ngFor="let emp of employees; let i = index ">
+    <td>{{i+1}}</td>
+    <td>{{emp.name}}({{emp.dob}})-{{emp.adhar}}{{emp.bloodGroup}}</td>
+    <td>{{emp.fatherName}}</td>
+    <td>{{emp.currentAddress}}</td>
+    <td>{{emp.contact1}}, {{emp.contact2}}</td>
+    <td>{{emp.postName}}</td>
+    <td>{{emp.joinDate}} : {{emp.releavingDate}}</td>
+    <td>{{emp.isActive}}</td>
+    <td><button class="btn btn-secondary" (click)="editStudent(emp,0)">Edit</button></td>
+    
+  </tr>
+ </tbody>
+
+</table>
+</div>

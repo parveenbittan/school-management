@@ -1,0 +1,72 @@
+
+<div>
+ 
+    <ng-container>
+      <ng-container *ngIf="visible">
+       
+        
+        <div style="padding: 60px;" id="report" >
+          
+          <div ng-template>
+            <div class="header" style="background-color:#DAF7A6; height:  100px;">
+              <img src="assets/school.png" alt="logo" />
+              <h4><b>{{orgname}} ({{orgaddress}})</b></h4>
+              
+            </div>
+            <div style="padding-top: 60px;"><p style="color:black;font-size:30px;text-align: center;"> <b><u>SCHOOL LEAVING CERTIFICATE</u></b></p></div>
+          <div style="padding: 60px;">
+            <p style="color:black;font-size:18px;text-align: left;font-weight: bold;">It is to certify that <span *ngIf="student.gender=='Male'"> Mr.</span> <span *ngIf="student.gender!='Male'"> Miss. </span>  <span> {{student.name}}</span>, <span *ngIf="student.gender=='Male'"> son</span> <span *ngIf="student.gender!='Male'"> daughter</span> of Mr. <span>{{student.fatherName}}</span>, is a bonafide student of Delhi Public School . <span *ngIf="student.gender=='Male'"> His</span> <span *ngIf="student.gender!='Male'"> Her</span> date of birth as per school record is {{student.dob}}. <span *ngIf="student.gender=='Male'"> He</span> <span *ngIf="student.gender!='Male'"> She</span>  has passed class <input type="text" style="border-width:0px; width: 70px;font-weight: bold;">. I wish <span *ngIf="student.gender=='Male'"> him</span> <span *ngIf="student.gender!='Male'"> her</span> very bright future. 
+
+ 
+            This certificate is being issued upon the request of <span *ngIf="student.gender=='Male'"> Mr.</span> <span *ngIf="student.gender!='Male'"> Miss. </span>  <span> {{student.name}}</span> for whatever legal purpose it may serve. </p>
+
+          </div>
+       
+            <div>&nbsp;</div>
+           
+                <p> <b>Sign and Stamp </b></p>
+                 
+                
+                
+            <div>&nbsp;</div>
+            <footer>
+              <p><b>
+                Email :{{orgemail}} &nbsp;   Contact : {{contact}},{{contact2}}</b>
+              </p>
+            </footer>
+            <div>&nbsp;</div>
+          </div>
+        </div>
+        
+      </ng-container>
+      <form  [formGroup]="searchForm"  style="padding: 30px;">
+       
+        
+        <div style="padding: 10px;"><b>Generate student relieving letter.</b></div>
+          <label><b><span style="color:red;">*</span></b>Session</label>
+          <select   id="ssession" [(ngModel)]="searchData.sessionId"  formControlName="ssession">
+            <option [ngValue]="0">Select Session</option>
+            <option *ngFor="let session of activeSessions" [ngValue]="session.sessionId">{{ session.sessionName }}
+            </option>
+          </select> &nbsp; &nbsp;&nbsp;
+          <label><b><span style="color:red;">*</span></b>Class</label>
+          <select   id="sclass" [(ngModel)]="searchData.classId"  formControlName="sclass" (change)='studentList()' >
+            <option [ngValue]="0">Select class</option>
+            <option *ngFor="let class of activeClasses" [ngValue]="class.classId">{{ class.className }}
+            </option>
+          </select>&nbsp; &nbsp;
+             
+              <label><b><span style="color:red;">*</span></b>Student </label>
+              <select   id="studentId" [(ngModel)]="searchData.studentId"  formControlName="studentId" (change)="character()">
+                  <option [ngValue]="0">Select Student</option>
+                  <option *ngFor="let stu of students" [ngValue]="stu.studentId">{{ stu.name }}-{{ stu.dob }} -{{ stu.adhar }}
+                  </option>
+                </select>&nbsp; &nbsp; &nbsp;
+                <button *ngIf="visible" class="btn btn-secondary" (click)="reportPDF()">PDF</button>
+                &nbsp;&nbsp;<button class="btn btn-secondary" (click)="clear()">Clear</button>
+            </form>
+            
+    </ng-container>
+    
+    
+    

@@ -1,0 +1,86 @@
+
+<div style="padding: 40px;" id="search">
+    
+    <ng-container >
+      <form  [formGroup]="searchForm" (ngSubmit)="onSearch()">
+        <label><b>Student Name</b></label>
+        <input type="text" id="sname"[(ngModel)]="searchData.name"  formControlName="sname">&nbsp; &nbsp;
+        
+          <label><b>Class</b></label>
+          <select   id="sclass" [(ngModel)]="searchData.classId"  formControlName="sclass">
+            <option [ngValue]="0">Select class</option>
+            <option *ngFor="let class of activeClasses" [ngValue]="class.classId">{{ class.className }}
+            </option>
+          </select>&nbsp; &nbsp;
+          <label><b>Session</b></label>
+          <select   id="sclass" [(ngModel)]="searchData.sessionId"  formControlName="sclass">
+            <option [ngValue]="0">Select Session</option>
+            <option *ngFor="let session of activeSessions" [ngValue]="session.sessionId">{{ session.sessionName }}
+            </option>
+          </select> &nbsp; &nbsp;&nbsp; &nbsp;
+          <button class="btn btn-secondary">Filter</button>&nbsp; &nbsp; <button  class="btn btn-secondary" (click)="reportPDF()">PDF</button>
+      </form>
+    </ng-container>
+    
+    
+    
+    
+    </div>
+     <div  class="body" id="report">
+      <p><b>Note : F is stands for tution fee and T stands for transport fee.</b></p>  
+    <table>
+    <thead>
+       
+      <tr>
+        <th>S.No</th>
+        <th>Name(DOB)</th>
+        <th>Admission</th> 
+        <th>Other Fee</th>
+        <th>April</th>
+        <th>May</th>
+        <th>June</th>
+        <th>July</th>
+        <th>Aug</th>
+        <th>Sept</th>
+        <th>Oct</th>
+        <th>Nov</th>
+        <th>Dec</th>
+        <th>Jan</th>
+        <th>Feb</th>
+        <th>Mar</th>
+        <th>Total</th>
+        <th>Comment</th>
+      </tr>
+      </thead>
+     
+      <tbody>
+      <tr  ng-template *ngFor="let stu of students; let i = index ">
+        <td>{{i+1}}</td>
+        <td>{{stu.name}}({{stu.dob}})-{{stu.className}}</td>
+        <td>{{stu.fee.addmissionFee}}</td> 
+        <td>{{stu.fee.otherFee}}</td>
+        <td>F-{{stu.fee.aprF}} <br>T-{{stu.fee.aprT}} </td>
+        <td>F-{{stu.fee.mayF}} <br>T-{{stu.fee.mayT}}</td>
+        <td>F-{{stu.fee.juneF}}<br>T-{{stu.fee.juneT}}</td>
+        <td>F-{{stu.fee.julyF}} <br>T-{{stu.fee.julyT}}</td>
+        <td>F-{{stu.fee.augF}} <br>T-{{stu.fee.augT}}</td>
+        <td>F-{{stu.fee.septF}} <br>T-{{stu.fee.septT}}</td>
+        <td>F-{{stu.fee.octF}} <br>T-{{stu.fee.octT}}</td>
+        <td>F-{{stu.fee.novF}} <br>T-{{stu.fee.novT}}</td>
+        <td>F-{{stu.fee.decemF}} <br>T-{{stu.fee.decemT}}</td>
+        <td>F-{{stu.fee.janF}} <br>T-{{stu.fee.janT}}</td>
+        <td>F-{{stu.fee.febF}} <br>T-{{stu.fee.febT}}</td>
+        <td>F-{{stu.fee.marF}} <br>T-{{stu.fee.marT}}</td>
+        <td>{{stu.total}}</td>
+        <td>{{stu.fee.comment}}</td>
+        
+      </tr>
+      <tr><td colspan="16">Total : </td>
+        <td>{{total}}</td>
+        <td></td>
+    </tr>
+     </tbody>
+    
+    </table>
+    </div>
+    

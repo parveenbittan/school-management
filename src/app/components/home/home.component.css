@@ -1,0 +1,8 @@
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+
+.render{
+    margin-top: 30px;
+    padding: 20px;
+    overflow: visible;
+}

@@ -1,0 +1,54 @@
+<h6>Manage -> Post</h6>
+
+<div class="form-fit">
+
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <input type="hidden" id="classId"[(ngModel)]="postData.postId"  formControlName="postId">
+  <label for="name"><b><span style="color:red;">*</span>Post Name</b></label>
+  <input type="text" id="name"[(ngModel)]="postData.postName" formControlName="name">&nbsp; &nbsp;
+
+  <label for="email"><b><span style="color:red;">*</span>Post Code </b></label>
+  <input type="email" id="email" [(ngModel)]="postData.postCode" formControlName="code">&nbsp; &nbsp;
+
+  <label for="Salary"><b>Salary</b></label>
+  <input type="number" id="salary" min="0" [(ngModel)]="postData.salary" formControlName="salary">&nbsp; &nbsp;
+
+  <label for="EPF"><b>EPF</b></label>
+  <input type="number" min="0" id="epf" [(ngModel)]="postData.pf" formControlName="pf">&nbsp; &nbsp;
+
+  <label for="password"><b>Active</b></label>
+  <input type="checkbox" [(ngModel)]="postData.isActive"   formControlName="isActive">&nbsp; &nbsp;
+
+  <!--<button  type="submit" [disabled]="myForm.invalid">Save</button>-->
+  <button style="color: #0483aa;"  type="submit">Save</button> &nbsp; &nbsp;<button type="button" style="color:#0483aa" (click)="addNewPost()">Add New</button>
+</form>
+</div>
+ <div  class="body">
+<table>
+<thead>
+  <tr>
+    <th>S.No</th>
+    <th>Post Name</th>
+    <th>Post Code</th>
+    <th>Salary</th>
+    <th>EPF</th>
+    <th>is Active</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+ 
+  <tbody>
+  <tr  ng-template *ngFor="let pos of posts; let i = index ">
+    <td>{{i+1}}</td>
+    <td>{{pos.postName}}</td>
+    <td>{{pos.postCode}}</td>
+    <td>{{pos.salary}}</td>
+    <td>{{pos.pf}}</td>
+    <td>{{pos.isActive}}</td>
+    <td><button style="color: #0483aa" (click)="editPost(pos)">Edit</button></td>
+    
+  </tr>
+ </tbody>
+
+</table>
+</div>

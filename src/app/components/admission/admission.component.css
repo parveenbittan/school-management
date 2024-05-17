@@ -1,0 +1,43 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;   
+    
+  }
+  
+  td{
+    
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 6px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+
+  }
+   thead th { 
+    position: sticky; 
+    background-color: #DAF7A6;
+    
+    top: 0; 
+  } 
+ 
+
+  .body {
+  
+    height: 410px;
+    overflow: auto;
+  }
+.header-fix{
+position: fixed;
+margin-top: 6px;
+
+}
+.add-new-button{
+   text-align: right;
+}
+
+.add-margin{
+  margin-top: 70px;
+}

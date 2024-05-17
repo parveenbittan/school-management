@@ -1,0 +1,60 @@
+
+<div style="padding: 40px;">
+    
+<ng-container >
+  <form  [formGroup]="searchForm" (ngSubmit)="onSearch()">
+    <label><b>Student Name  </b></label>
+    <input type="text" id="sname"[(ngModel)]="searchData.name"  formControlName="sname">&nbsp; &nbsp;
+    
+      <label><b>Class  </b></label>
+      <select   id="sclass" [(ngModel)]="searchData.classId"  formControlName="sclass">
+        <option [ngValue]="0">Select class</option>
+        <option *ngFor="let class of activeClasses" [ngValue]="class.classId">{{ class.className }}
+        </option>
+      </select>&nbsp; &nbsp;
+      <label><b>Session  </b></label>
+      <select   id="sclass" [(ngModel)]="searchData.sessionId"  formControlName="sclass">
+        <option [ngValue]="0">Select Session</option>
+        <option *ngFor="let session of activeSessions" [ngValue]="session.sessionId">{{ session.sessionName }}
+        </option>
+      </select> &nbsp; &nbsp;&nbsp; &nbsp;
+      <button class="btn btn-secondary">Filter</button>
+  </form>
+</ng-container>
+
+
+
+
+</div>
+ <div  class="body">
+<table>
+<thead>
+  <tr>
+    <th>S.No</th>
+    <th>Name(DOB)-Adhar(BloodGroup)</th>
+    <th>Gardians</th>
+    <th>Address</th>
+    <th>Contact</th>
+    <th>class</th>
+    <th>session</th>
+    <th>Active</th>
+    
+  </tr>
+  </thead>
+ 
+  <tbody>
+  <tr  ng-template *ngFor="let stu of students; let i = index ">
+    <td>{{i+1}}</td>
+    <td>{{stu.name}}({{stu.dob}})-{{stu.adhar}}{{stu.bloodGroup}}</td>
+    <td>{{stu.fatherName}}, {{stu.motherName}}</td>
+    <td>{{stu.currentAddress}}</td>
+    <td>{{stu.contact1}}, {{stu.contact2}}</td>
+    <td>{{stu.className}}</td>
+    <td>{{stu.sessionName}}</td>
+    <td>{{stu.isActive}}</td>
+    
+  </tr>
+ </tbody>
+
+</table>
+</div>

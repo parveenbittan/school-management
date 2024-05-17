@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <!--<a class="navbar-brand pb-2" aria-disabled="disabled"><img src="assets/school.png" style="width: 58px;height: 68px;" alt="Logout"></a>-->
+ 
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+          <li class="nav-item active" *ngIf="role=='superadmin'||role=='admin'|| role=='clerk' || role=='teacher'|| role=='general'">
+              <a class="nav-link"(click)="dashboard()">Home </a>
+          </li>
+        
+          <li class="nav-item dropdown" *ngIf="role=='admin'||role=='superadmin'">
+              <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Manage </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <!--<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >Master Data</a>
+                      <ul class="dropdown-menu">-->
+                          <li *ngIf="role=='superadmin'"><a class="dropdown-item" (click)="session()">Session</a></li>
+                          <li><a class="dropdown-item" (click)="comesUnder()"><b>Class</b></a></li>
+                          <li><a class="dropdown-item" (click)="subject()"><b>Subject</b></a></li>
+                          <li><a class="dropdown-item" (click)="exam()"><b>Exam</b></a></li>
+                          <li><a class="dropdown-item" (click)="item()"><b>Item</b></a></li>
+                          <li><a class="dropdown-item" (click)="classSubject()"><b>Class-Subject</b></a></li>
+                          <li><a class="dropdown-item" (click)="examClass()"><b>Exam-Class</b></a></li>
+                          <li><a class="dropdown-item" (click)="post()"><b>Post</b></a></li>
+                     <!-- </ul>
+                  </li>-->
+              </ul>
+          </li>
+          <li class="nav-item dropdown"  *ngIf="role=='superadmin'||role=='admin'|| role=='clerk' || role=='teacher'">
+            <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Student </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">  
+                        <li *ngIf="role=='superadmin'||role=='admin'|| role=='clerk'"><a class="dropdown-item" (click)="admission()"><b>Admission</b></a></li>
+                       <li *ngIf="role=='superadmin'||role=='admin'|| role=='clerk'"><a class="dropdown-item" (click)="fee()"><b>Fee Submit</b></a></li>
+                       <li *ngIf="role=='superadmin'||role=='admin'|| role=='clerk'"><a class="dropdown-item" (click)="feeReport()"><b>Fee Report</b></a></li>                      
+                        <li><a class="dropdown-item" (click)="attendence()"><b>Attendence</b></a></li>
+                        <li><a class="dropdown-item" (click)="report()"><b>Report Card</b></a></li>
+                        <li *ngIf="role=='superadmin'||role=='admin'|| role=='clerk'"><a class="dropdown-item" (click)="cc()"><b>Character Certificate</b></a></li>
+                        <li *ngIf="role=='superadmin'||role=='admin'|| role=='clerk'"><a class="dropdown-item" (click)="rleaving()"><b>Relieving</b> </a></li>
+                        <li *ngIf="role=='superadmin'||role=='admin'|| role=='clerk'"><a class="dropdown-item" (click)="SIDCard()"><b>Student Id Card</b> </a></li>
+            </ul>
+        </li>
+        <li class="nav-item dropdown" *ngIf="role=='superadmin'||role=='admin'">
+            <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Employee </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">  
+                        <li><a class="dropdown-item" (click)="employee()"><b>Employee Detail</b></a></li>
+                        <!--<li><a class="dropdown-item" (click)="comesUnder()">Salary</a></li>-->
+                        <li><a class="dropdown-item" (click)="empJoining()"><b>Joining letter</b> </a></li>                        
+                        <li><a class="dropdown-item" (click)="empExperience()"><b>Experience letter</b></a></li>
+                        <li><a class="dropdown-item" (click)="empRelieving()"><b>Relieving letter</b></a></li>
+            </ul>
+        </li>
+         
+          
+          <li class="nav-item">
+              <a class="nav-link" (click)="contact()">Contact</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Profile </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">  
+                        
+                        <li><a class="dropdown-item" (click)="changePassword()"><b>Change Password({{role}})</b></a></li>
+                        <li><a class="dropdown-item" (click)="logout()"><b>Logout</b></a></li>
+                        
+            </ul>
+        </li>
+         
+      </ul>
+       
+  </div>
+</nav>

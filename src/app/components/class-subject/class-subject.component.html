@@ -1,0 +1,59 @@
+<h6>Manage -> Class-Subject</h6>
+<div>
+
+<div class="form-fit">
+
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <input type="hidden" id="classSubjectMappingId"[(ngModel)]="classSubjectData.classSubjectMappingId"  formControlName="classSubjectMappingId">
+ 
+  <label><b><span style="color:red;">*</span>Class</b></label>
+    <select  id="class" [(ngModel)]="classSubjectData.classId"  formControlName="class">
+      <option [ngValue]="0">Select Class</option>
+      <option *ngFor="let class of activeClasses" [ngValue]="class.classId">{{ class.className }} </option>
+      
+      <!--<option *ngFor="let hoby of Hobbies" [value]="hoby">{{hoby}}</option>-->
+    </select> &nbsp; &nbsp;
+    
+       
+      
+        <label><b><span style="color:red;">*</span>Subject</b></label>
+        <select   id="subject" [(ngModel)]="classSubjectData.subjectId"  formControlName="subject">
+          <option [ngValue]="0">Select Subject</option>
+          <option *ngFor="let subject of activeSubjects" [ngValue]="subject.subjectId">{{ subject.subjectName }}
+          </option>
+          <!--<option *ngFor="let hoby of Hobbies" [value]="hoby">{{hoby}}</option>-->
+        </select>&nbsp; &nbsp;
+        
+               
+  <label><b>Active </b></label>
+  <input type="checkbox" [(ngModel)]="classSubjectData.isActive"  id="isClassSubjectActive" formControlName="isClassSubjectActive">&nbsp; &nbsp;
+
+  <!--<button  type="submit" [disabled]="myForm.invalid">Save</button>-->
+  <button style="color: #0483aa;"  type="submit">Save</button> &nbsp; &nbsp;<button type="button" style="color:#0483aa" (click)="addNewClassSubject()">Add New</button>
+</form>
+</div>
+ <div  class="body">
+<table>
+<thead>
+  <tr>
+    <th>S.No</th>
+    <th>class Name</th>
+    <th>Subject Name</th>
+    <th>is Active</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+ 
+  <tbody>
+  <tr  ng-template *ngFor="let cs of classSubjects; let i = index ">
+    <td>{{i+1}}</td>
+    <td>{{cs.className}}</td>
+    <td>{{cs.subjectName}}</td>
+    <td>{{cs.isActive}}</td>
+    <td><button style="color: #0483aa" (click)="editClassSubjects(cs)">Edit</button></td>
+    
+  </tr>
+ </tbody>
+
+</table>
+</div>

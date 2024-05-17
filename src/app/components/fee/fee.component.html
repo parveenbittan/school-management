@@ -1,0 +1,171 @@
+
+<div>
+  
+  <ng-container>
+    <ng-container *ngIf="visible">
+      <div id="history" style="display: none;padding: 20px;">
+        <table><thead><tr><th>Total Paid</th><th>Last Paid</th> <th>comment</th> <th>Date</th></tr></thead>
+       <tbody><tr *ngFor="let fh of feeHistory; let i = index"><td>{{fh.total}}</td> <td>{{fh.lastPaid}}</td> <td>{{fh.comment}}</td> <td>{{fh.updateDate}}</td></tr></tbody>
+       </table>&nbsp;&nbsp;
+       <button class="btn btn-secondary" (click)="showHtmlDiv('false')">Close</button>
+       </div>
+      <form [formGroup]="myForm" (ngSubmit)="saveFee()"> 
+        <div style="padding: 60px;" id="report" >
+          
+            
+        <div ng-template>
+           <!--   <div class="header" style="background-color:#DAF7A6; height:  100px;">
+              <img src="assets/school.png" alt="logo" />
+              <h4><b>{{orgname}} ({{orgaddress}})</b></h4>
+              
+            </div>-->
+        <input  type="hidden" [(ngModel)]="student.studentId" formControlName="studentId">
+            <input  type="hidden" [(ngModel)]="student.classId" formControlName="classId">
+            <input  type="hidden" [(ngModel)]="student.sessionId" formControlName="sessionId">
+            <table>
+                <tbody><tr>
+                  <td>Name : {{student.name}} ({{student.gender}})</td>
+                  <td>Father Name : {{student.fatherName}}</td> 
+                  <td>Current Address : {{student.currentAddress}}</td>
+                  <td>Student Rg.: {{student.className}} - {{student.studentId}}</td>
+                  </tr>
+                  
+              </table>
+       
+            <div>&nbsp;</div>
+            <table>
+                <tbody><tr>
+                  <td>Session: {{student.sessionName}} </td>
+                  <td>Admission Paid :<input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.addmissionFee" formControlName="addmissionFee"></td>
+                  <td>Other allownce Paid : <input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.otherFee" formControlName="otherFee"></td> 
+                  <td>Total Paid : <a  (click)="showHtmlDiv('true')"> {{student.total}}</a></td> 
+                 
+                 
+                  
+                  </tr>
+                  
+              </table>
+       
+            <div>&nbsp;</div>
+            <table>
+                <thead>
+                    <tr><th colspan="12">Tution Fee</th></tr>
+                    <tr>
+                  <th>Apr </th>
+                  <th>May</th>
+                  <th>Jun</th> 
+                  <th>Jul</th>
+                  <th>Aug </th>
+                  <th>Sept</th>
+                  <th>Oct</th> 
+                  <th>Nov</th>
+                  <th>Dec </th>
+                  <th>Jan</th>
+                  <th>Feb</th> 
+                  <th>Mar</th>
+                  </tr>
+                  
+                </thead>
+                <tbody><tr>
+                    <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.aprF" formControlName="aprF"></td>
+                    <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.mayF" formControlName="mayF"></td>
+                    <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.juneF" formControlName="juneF"></td>
+                    <td><input style=" width: 90px;font-weight: bold;"  type="number" [(ngModel)]="student.fee.julyF" formControlName="julyF"></td>
+                    <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.augF" formControlName="augF"></td>
+                    <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.septF" formControlName="septF"></td>
+                    <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.octF" formControlName="octF"></td>
+                    <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.novF" formControlName="novF"></td>
+                    <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.decemF" formControlName="decem"></td>
+                    <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.janF" formControlName="janF"></td>
+                    <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.febF" formControlName="febF"></td>
+                    <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.marF" formControlName="marF"></td>
+                    
+                </tr></tbody>
+            </table>
+            <div>&nbsp;</div>
+           
+            <table>
+                <thead>
+                    <tr><th colspan="12">Transport Fee</th></tr>
+                    <tr>
+                  <th>Apr </th>
+                  <th>May</th>
+                  <th>Jun</th> 
+                  <th>Jul</th>
+                  <th>Aug </th>
+                  <th>Sept</th>
+                  <th>Oct</th> 
+                  <th>Nov</th>
+                  <th>Dec </th>
+                  <th>Jan</th>
+                  <th>Feb</th> 
+                  <th>Mar</th>
+                  </tr>
+                  
+                </thead>
+                <tbody><tr>
+                  <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.aprT" formControlName="aprT"></td>
+                  <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.mayT" formControlName="mayT"></td>
+                  <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.juneT" formControlName="juneT"></td>
+                  <td><input style=" width: 90px;font-weight: bold;"  type="number" [(ngModel)]="student.fee.julyT" formControlName="julyT"></td>
+                  <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.augT" formControlName="augT"></td>
+                  <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.septT" formControlName="septT"></td>
+                  <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.octT" formControlName="octT"></td>
+                  <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.novT" formControlName="novT"></td>
+                  <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.decemT" formControlName="decemT"></td>
+                  <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.janT" formControlName="janT"></td>
+                  <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.febT" formControlName="febT"></td>
+                  <td><input style=" width: 90px;font-weight: bold;" type="number" [(ngModel)]="student.fee.marT" formControlName="marT"></td>
+                  
+                </tr></tbody>
+            </table>
+            <div>Comment : <input  type="text" style="width:100%;" [(ngModel)]="student.fee.comment" formControlName="comment"></div>
+            <div>&nbsp;</div>
+                <p> <b>Sign and Stamp </b></p>
+                 
+                
+                
+           <!-- <div>&nbsp;</div>
+            <footer>
+              <p><b>
+                Email :{{orgemail}} &nbsp;   Contact : {{contact}},{{contact2}}</b>
+              </p>
+            </footer>
+            <div>&nbsp;</div>-->
+          </div>
+        
+  
+        </div>
+        <button  class="btn btn-secondary"   type="submit">Save Fee</button>
+        </form>
+    </ng-container>
+     <form  [formGroup]="searchForm"  style="padding: 30px;">
+     
+      
+      <div style="padding: 10px;"><b>Student fee submit.</b></div>
+        <label><b><span style="color:red;">*</span>Session</b></label>
+        <select   id="ssession" [(ngModel)]="searchData.sessionId"  formControlName="ssession">
+          <option [ngValue]="0">Select Session</option>
+          <option *ngFor="let sess of activeSessions" [ngValue]="sess.sessionId">{{sess.sessionName}}
+          </option>
+        </select> &nbsp; &nbsp;&nbsp;
+        <label><b><span style="color:red;">*</span>Class</b></label>
+        <select   id="sclass" [(ngModel)]="searchData.classId"  formControlName="sclass" (change)='studentList()' >
+          <option [ngValue]="0">Select class</option>
+          <option *ngFor="let class of activeClasses" [ngValue]="class.classId">{{ class.className }}
+          </option>
+        </select>&nbsp; &nbsp;
+           
+            <label><b><span style="color:red;">*</span>Student </b></label>
+            <select   id="studentId" [(ngModel)]="searchData.studentId"  formControlName="studentId" (change)="character()">
+                <option [ngValue]="0">Select Student</option>
+                <option *ngFor="let stu of students" [ngValue]="stu.studentId">{{ stu.name }}-{{ stu.dob }} -{{ stu.adhar }}
+                </option>
+              </select>&nbsp; &nbsp; &nbsp;
+              <button *ngIf="visible" class="btn btn-secondary" (click)="reportPDF()">PDF</button>
+              &nbsp;&nbsp;<button class="btn btn-secondary" (click)="clear()">Clear</button>
+          </form>
+  
+           
+  </ng-container>
+</div>

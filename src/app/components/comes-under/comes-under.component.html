@@ -1,0 +1,45 @@
+<h6>Manage -> Class</h6>
+<div>
+
+<div class="form-fit">
+
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <input type="hidden" id="classId"[(ngModel)]="clasData.classId"  formControlName="classId">
+  <label for="name"><b><span style="color:red;">*</span>Class Name </b> </label>
+  <input type="text" id="name"[(ngModel)]="clasData.className" formControlName="name">&nbsp; &nbsp;
+
+  <label for="email"><b><span style="color:red;">*</span>Class Detail </b></label>
+  <input type="email" id="email" [(ngModel)]="clasData.classDesc" formControlName="desc">&nbsp; &nbsp;
+
+  <label for="password"><b>Active </b></label>
+  <input type="checkbox" [(ngModel)]="clasData.isActive"   formControlName="isActive">&nbsp; &nbsp;
+
+  <!--<button  type="submit" [disabled]="myForm.invalid">Save</button>-->
+  <button style="color: #0483aa;"  type="submit">Save</button> &nbsp; &nbsp;<button type="button" style="color:#0483aa" (click)="addNewClass()">Add New</button>
+</form>
+</div>
+ <div  class="body">
+<table>
+<thead>
+  <tr>
+    <th>S.No</th>
+    <th>Class Name</th>
+    <th>Class Detail</th>
+    <th>is Active</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+ 
+  <tbody>
+  <tr  ng-template *ngFor="let cl of classes; let i = index ">
+    <td>{{i+1}}</td>
+    <td>{{cl.className}}</td>
+    <td>{{cl.classDesc}}</td>
+    <td>{{cl.isActive}}</td>
+    <td><button style="color: #0483aa" (click)="editClass(cl)">Edit</button></td>
+    
+  </tr>
+ </tbody>
+
+</table>
+</div>

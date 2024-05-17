@@ -1,0 +1,66 @@
+
+
+ 
+ 
+        
+      
+    <div class="form-fit" style="padding: 20px;">
+        <label><b>Exam Class Mapping .</b></label>
+
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+          <input type="hidden" id="classSubjectMappingId"[(ngModel)]="examClasshData.examClassId"  formControlName="examClassId">
+         
+          <label><b><span style="color:red;">*</span>Class</b></label>
+            <select  id="class" [(ngModel)]="examClasshData.classId"  formControlName="classId">
+              <option [ngValue]="0">Select Class</option>
+              <option *ngFor="let class of activeClasses" [ngValue]="class.classId">{{ class.className }} </option>
+              
+              <!--<option *ngFor="let hoby of Hobbies" [value]="hoby">{{hoby}}</option>-->
+            </select> &nbsp; &nbsp;
+            
+               
+              
+                <label><b><span style="color:red;">*</span>Exam</b></label>
+                <select    [(ngModel)]="examClasshData.examId"  formControlName="examId">
+                  <option [ngValue]="0">Select Exam</option>
+                  <option *ngFor="let exam of activeExams" [ngValue]="exam.examId">{{ exam.examName }}
+                  </option>
+                  <!--<option *ngFor="let hoby of Hobbies" [value]="hoby">{{hoby}}</option>-->
+                </select>&nbsp; &nbsp;
+                
+                       
+          <label><b><span style="color:red;">*</span>Marks </b></label>
+          <input type="number" [(ngModel)]="examClasshData.maxMarks" maxlength="3"   formControlName="maxMarks">&nbsp; &nbsp;
+        
+          <!--<button  type="submit" [disabled]="myForm.invalid">Save</button>-->
+          <button style="color: #0483aa;"  type="submit">Save</button> &nbsp; &nbsp;<button type="button" style="color:#0483aa" (click)="addNewExamClass()">Add New</button>
+        </form>
+        </div>
+    
+    
+    <div  class="body">
+        <table>
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>class Name</th>
+            <th>Exam Name</th>
+            <th>Max Marks</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+         
+          <tbody>
+          <tr  ng-template *ngFor="let cs of examClasses; let i = index ">
+            <td>{{i+1}}</td>
+            <td>{{cs.className}}</td>
+            <td>{{cs.examName}}</td>
+            <td>{{cs.maxMarks}}</td>
+            <td><button style="color: #0483aa" (click)="editExamClass(cs)">Edit</button></td>
+            
+          </tr>
+         </tbody>
+        
+        </table>
+        </div>
+        

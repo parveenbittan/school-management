@@ -1,0 +1,44 @@
+<h6>Manage -> Session</h6>
+
+<div class="form-fit">
+
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <input type="hidden" id="classId"[(ngModel)]="sessionData.sessionId"  formControlName="sessionId">
+  <label for="name"><b><span style="color:red;">*</span></b>Session Name: </label>
+  <input type="text" id="name"[(ngModel)]="sessionData.sessionName" formControlName="name">&nbsp; &nbsp;
+
+  <label for="email"><b><span style="color:red;">*</span></b>Session Code: </label>
+  <input type="email" id="email" [(ngModel)]="sessionData.sessionCode" formControlName="code">&nbsp; &nbsp;
+
+  <label for="password">Active: </label>
+  <input type="checkbox" [(ngModel)]="sessionData.isActive"   formControlName="isActive">&nbsp; &nbsp;
+
+  <!--<button  type="submit" [disabled]="myForm.invalid">Save</button>-->
+  <button style="color: #0483aa;"  type="submit">Save</button> &nbsp; &nbsp;<button type="button" style="color:#0483aa" (click)="addNewSession()">Add New</button>
+</form>
+</div>
+ <div  class="body">
+<table>
+<thead>
+  <tr>
+    <th>S.No</th>
+    <th>Session Name</th>
+    <th>Session Code</th>
+    <th>is Active</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+ 
+  <tbody>
+  <tr  ng-template *ngFor="let sess of sessions; let i = index ">
+    <td>{{i+1}}</td>
+    <td>{{sess.sessionName}}</td>
+    <td>{{sess.sessionCode}}</td>
+    <td>{{sess.isActive}}</td>
+    <td><button style="color: #0483aa" (click)="editSession(sess)">Edit</button></td>
+    
+  </tr>
+ </tbody>
+
+</table>
+</div>

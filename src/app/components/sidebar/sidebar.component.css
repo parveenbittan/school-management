@@ -1,0 +1,65 @@
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+.navbar-nav {
+  background-color: #DAF7A6;
+  margin-top:25px ;
+  margin-left:0x ;
+  margin-right:0px ;
+  width: 100%;
+  height: 70px;
+  font-size:18px;
+  text-align: center;
+  font-weight: bold;
+  text-align: center;
+  position: fixed; /* Set the navbar to fixed position */
+  z-index: 999;
+  
+}
+.navbar-brand {
+  background-color: #DAF7A6;
+  margin-top:25px ;
+  margin-left:0px ;
+  margin-right:0px ;
+  height: 70px;
+  font-size:18px;
+  text-align: center;
+  font-weight: bold;
+  text-align: center;
+  position: fixed; /* Set the navbar to fixed position */
+  z-index: 999;
+}
+.navbar-nav li:hover > ul.dropdown-menu {
+  background-color: #DAF7A6;
+  display: grid;
+  z-index: 998;
+ 
+  
+}
+.dropdown-submenu {
+  background-color:#DAF7A6;
+  position:relative;
+  z-index: 998;
+}
+.dropdown-submenu > .dropdown-menu {
+  background-color: #DAF7A6;
+  top: 0;
+  left: 100%;
+  margin-top:-6px;
+  font-size:18px;
+  
+  font-weight: bold;
+  text-align: center;
+ 
+}
+
+/* rotate caret on hover */
+.dropdown-menu > li > a:hover:after {
+  background-color: #DAF7A6;
+  text-decoration: underline;
+  transform: rotate(-90deg);
+  font-size:18px;
+  
+  font-weight: bold;
+  text-align: center;
+  
+} 

@@ -1,0 +1,178 @@
+<div class="header-fix"><h6>Student -> Admission</h6></div>
+<div>
+    
+<ng-container *ngIf="! visible">
+  <div class="add-new-button"><button class="btn btn-secondary" (click)="addNewStudent()">Admission</button></div>
+  <form  [formGroup]="searchForm" (ngSubmit)="onSearch()">
+    <label>Student Name</label>
+    <input type="text" id="sname"[(ngModel)]="searchData.name"  formControlName="sname">&nbsp; &nbsp;
+    
+      <label>Class</label>
+      <select   id="sclass" [(ngModel)]="searchData.classId"  formControlName="sclass">
+        <option [ngValue]="0">Select class</option>
+        <option *ngFor="let class of activeClasses" [ngValue]="class.classId">{{ class.className }}
+        </option>
+      </select>&nbsp; &nbsp;
+      <label>Session</label>
+      <select   id="sclass" [(ngModel)]="searchData.sessionId"  formControlName="sclass">
+        <option [ngValue]="0">Select Session</option>
+        <option *ngFor="let session of activeSessions" [ngValue]="session.sessionId">{{ session.sessionName }}
+        </option>
+      </select> &nbsp; &nbsp;&nbsp; &nbsp;
+      <button class="btn btn-secondary">Filter</button>
+  </form>
+</ng-container>
+
+<ng-container *ngIf="visible">
+  
+  
+    <div class="container mt-5 add-margin">
+        <form novalidate [formGroup]="myForm" (ngSubmit)="onSubmit()">
+          <div class="form-group" style="text-align: center;">
+            <label><b>Required session, class, name ,father name,mother name,gender,adhar,DOB.</b></label>
+            <input type="hidden"  id="studentId"  [(ngModel)]="studentData.sessionId" formControlName="studentId">
+            
+               </div> 
+          <div class="form-group mb-3">
+            
+          <select class="form-control"   id="session" [(ngModel)]="studentData.sessionId"  formControlName="session">
+            <option [ngValue]="0">Select Session</option>
+            <option *ngFor="let session of activeSessions" [ngValue]="session.sessionId">{{ session.sessionName }} </option>
+            
+            <!--<option *ngFor="let hoby of Hobbies" [value]="hoby">{{hoby}}</option>-->
+          </select>
+          
+             </div>  
+             <div class="form-group mb-3">
+              <label><b><span style="color:red;">*</span></b>Class</label>
+              <select class="form-control"  id="class" [(ngModel)]="studentData.classId"  formControlName="class">
+                <option [ngValue]="0">Select Session</option>
+                <option *ngFor="let class of activeClasses" [ngValue]="class.classId">{{ class.className }}
+                </option>
+                <!--<option *ngFor="let hoby of Hobbies" [value]="hoby">{{hoby}}</option>-->
+              </select>
+              
+                 </div>     
+          <div class="form-group mb-3">
+            <label><b><span style="color:red;">*</span></b>Name</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="studentData.name"  maxlength="40" formControlName="name"/>
+          </div>
+          <div class="form-group mb-3">
+            <label><b><span style="color:red;">*</span></b>Father Name</label>
+            <input type="text" class="form-control" id="fatherName" [(ngModel)]="studentData.fatherName" maxlength="40" formControlName="fatherName"/>
+          </div>
+          <div class="form-group mb-3">
+            <label><b><span style="color:red;">*</span></b>Mother Name</label>
+            <input type="text" class="form-control" id="motherName" [(ngModel)]="studentData.motherName" maxlength="40"  formControlName="motherName"/>
+          </div>
+          <div class="form-group mb-3">
+            <label><b><span style="color:red;">*</span></b>Gender</label>
+            <select class="form-control"  id="gender" [(ngModel)]="studentData.gender"  formControlName="gender">
+                <option value="">Select an option</option>
+                <option >Male</option>
+                <option >Female</option>
+                <option >Transgender</option>
+               
+              </select>
+           
+          </div>
+          <div class="form-group mb-3">
+            <label><b><span style="color:red;">*</span></b>Student Adhar</label>
+            <input type="number" onKeyPress="if(this.value.length==12) return false;"   class="form-control" id="adhar" [(ngModel)]="studentData.adhar"  formControlName="adhar"/>
+          </div>
+         
+          <div class="form-group mb-3">
+            <label><b><span style="color:red;">*</span></b>Date of Birth</label>
+            <input type="date" maxLength="10" placeholder= "dd-mm-yyyy" class="form-control" id="dob" [(ngModel)]="studentData.dob"  formControlName="dob"/>
+            </div>
+          <div class="form-group mb-3">
+            <label><b><span style="color:red;">*</span></b>Current Address</label>
+            <input type="text" class="form-control"  id="currentAddress" [(ngModel)]="studentData.currentAddress"  formControlName="currentAddress"/>
+          </div>
+          <div class="form-group mb-3">
+            <label>Permanent Address</label>
+            <input type="text" class="form-control"  id="permanentAddress" [(ngModel)]="studentData.permanentAddress"  formControlName="permanentAddress"/>
+          </div>
+          <div class="form-group mb-3">
+            <label><b><span style="color:red;">*</span></b>Contact 1</label>
+            <input type="number" onKeyPress="if(this.value.length==10) return false;" class="form-control"  id="contact1" [(ngModel)]="studentData.contact1"  formControlName="contact1"/>
+          </div>
+          <div class="form-group mb-3">
+            <label>Contact 2</label>
+            <input type="number" onKeyPress="if(this.value.length==10) return false;" class="form-control"  id="contact2" [(ngModel)]="studentData.contact2"  formControlName="contact2"/>
+          </div>
+          <div class="form-group mb-3">
+            <label><b><span style="color:red;">*</span></b>Blood Goup</label>
+            <select class="form-control"  id="bloodGroup" [(ngModel)]="studentData.bloodGroup"  formControlName="bloodGroup">
+                <option value="">Select an option</option>
+                <option >(A+)</option>
+                <option >(A-)</option>
+                <option >(B+)</option>
+                <option >(B-)</option>
+                <option >(O+)</option>
+                <option >(O-)</option>
+                <option >(AB+)</option>
+                <option >(AB-)</option>
+                <!--<option *ngFor="let hoby of Hobbies" [value]="hoby">{{hoby}}</option>-->
+              </select>
+           
+          </div>
+          <div class="form-group mb-3">
+            <label>Board Registraion</label>
+            <input type="text" maxLength="30"  class="form-control" id="boardRegistraion" [(ngModel)]="studentData.boardRegistraion"  formControlName="boardRegistraion"/>
+            </div>
+          <div class="form-group mb-3">
+            <label>Admission Date</label>
+            <input type="date" [maxLength]="10" placeholder= "dd-mm-yyyy" class="form-control" id="admissionDate" [(ngModel)]="studentData.admissionDate"  formControlName="admissionDate"/>
+            </div>
+
+            
+            
+          <div class="form-group mb-3">
+            <label>Active</label>
+            <input type="checkbox"    id="isActive" [(ngModel)]="studentData.isActive"  formControlName="isActive"/>
+          </div>
+          <div class="form-group mb-3">
+            <button class="btn btn-secondary">Submit</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-secondary" (click)="closeForm()">Close</button>
+          </div>
+        </form>
+      </div>
+
+</ng-container>
+</div>
+ <div  class="body">
+<table>
+<thead>
+  <tr>
+    <th>S.No</th>
+    <th>Name(BOB)-BloodGroup</th>
+    <th>Gardians</th>
+    <th>Address</th>
+    <th>Contact</th>
+    <th>class</th>
+    <th> Reg. No.</th>
+    <th>session</th>
+    <th>Active</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+ 
+  <tbody>
+  <tr  ng-template *ngFor="let stu of students; let i = index ">
+    <td>{{i+1}}</td>
+    <td><table><tr><td>{{stu.name}}({{stu.dob}})-{{stu.bloodGroup}}</td><td><img id="stu.studentId" src="assets/{{stu.studentId}}.jpg" style="width: 58px;height: 68px;" alt="" ></td></tr></table> </td>
+    <td>{{stu.fatherName}}</td>
+    <td>{{stu.currentAddress}}</td>
+    <td>{{stu.contact1}}, {{stu.contact2}}</td>
+    <td>{{stu.className}}</td>
+    <td>{{stu.boardRegistraion}}</td>
+    <td>{{stu.sessionName}}</td>
+    <td>{{stu.isActive}}</td>
+    <td><img src="assets/edit.png"  style="width: 15px;" (click)="editStudent(stu,0)"><img src="assets/upload.png" style="width: 15px;" (click)="photoStudent(stu)"></td>
+    
+  </tr>
+ </tbody>
+
+</table>
+</div>

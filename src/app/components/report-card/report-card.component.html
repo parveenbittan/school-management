@@ -1,0 +1,157 @@
+
+<div>
+ 
+  <ng-container>
+    <ng-container *ngIf="visible">
+      <div style="padding: 60px;" id="report" >
+        
+        <div ng-template *ngFor="let stu of report" id="{{stu.studentId}}">
+          <div class="header" style="background-color:#DAF7A6; height:  100px;">
+            <img src="assets/school.png" alt="logo" />
+            <h4><b>{{orgname}} ({{orgaddress}})</b></h4>
+            
+          </div>
+          <div>&nbsp;</div>
+          <img id="stu.studentId" src="assets/{{stu.studentId}}.jpg" style="width: 68px;height: 68px;" alt="" >
+          <table>
+            <tbody>
+            
+              <tr>
+              <td>Name : {{stu.name}} ({{stu.gender}}) </td>
+              <td>Father Name : {{stu.fatherName}}</td> 
+              <td>Mother Name : {{stu.motherName}}</td>
+              </tr>
+              <tr>
+                <td>Roll No : {{stu.className}} - {{stu.studentId}}</td>
+                <td>Report Card : {{stu.examType}}</td>
+                <td>Session : {{stu.sessionName}}</td>
+                </tr></tbody>
+          </table>
+          <div>&nbsp;</div>
+        
+      <table  >
+  
+        <thead>
+          <ng-container *ngIf="stu.isSmesterSystem"><tr>
+           
+            <th > </th>
+            <th colspan="2"> Smester 1 </th>
+            <th colspan="2"> Smester 2 </th>
+  
+            
+          </tr></ng-container>
+          <tr>
+           
+            <th >Subject </th>
+            <th> Marks Obtained </th>
+            <th > Max Marks </th>
+            <ng-container *ngIf="stu.isSmesterSystem"><th> Marks Obtained </th>
+              <th > Max Marks </th></ng-container>
+           
+          </tr></thead>
+          <tbody *ngFor="let res of stu.result ; let k = index">
+           
+            <tr>
+              <td>{{res.subjectName}} </td>
+              <td>  <input type="number" value="{{res.obtainMark}}" id="obtain[{{k}}]" style="border-width:0px;"> </td>
+              <td> <input type="number" value="{{res.maxMark}}" id="max[{{k}}]" style="border-width:0px;"></td>
+              <ng-container *ngIf="stu.isSmesterSystem"><td>  <input type="number" value="{{res.obtainMark}}" style="border-width:0px;"></td>
+                <td > <input type="number" value="{{res.maxMark}}" style="border-width:0px;"> </td></ng-container>         </tr>
+          </tbody>
+          <tr><td>Total </td>
+            <td>  <input type="number" style="border-width:0px;"> </td>
+            <td> <input type="number"  style="border-width:0px;"></td>
+            <ng-container *ngIf="stu.isSmesterSystem"><td>  <input type="number" style="border-width:0px;"></td>
+              <td > <input type="number"  style="border-width:0px;"> </td></ng-container>         </tr>
+            
+          </table>
+          <div>&nbsp;</div>
+          <table>
+            <tbody style="border: 0px;"><tr>
+              <td>Teacher Sign </td>
+              <td>Principal Sign</td> 
+              
+              </tr>
+              </tbody>
+          </table>
+          <div>&nbsp;</div>
+          <footer>
+            <p><b>
+              Email :{{orgemail}} &nbsp;   Contact : {{contact}},{{contact2}}</b>
+            </p>
+          </footer>
+          <div>&nbsp;</div>
+        </div>
+      </div>
+      
+    </ng-container>
+    <form  [formGroup]="searchForm" (ngSubmit)="onSearch()" style="padding: 30px;">
+      <div style="padding: 10px;"><b>Generate student report card.</b></div>
+      <label><b><span style="color:red;">*</span>Class</b></label>
+        <select   id="sclass" [(ngModel)]="searchData.classId"  formControlName="sclass" (change)="examList()">
+          <option [ngValue]="0">Select class</option>
+          <option *ngFor="let class of activeClasses" [ngValue]="class.classId">{{ class.className }}
+          </option>
+        </select>&nbsp; &nbsp;
+      <label><b><span style="color:red;">*</span>Exam </b></label>
+      <select   id="ename" [(ngModel)]="searchData.examId"  formControlName="ename">
+          <option [ngValue]="0">Select Exam</option>
+          <option *ngFor="let exam of activeExams" [ngValue]="exam.examId">{{ exam.examName }}
+          </option>
+        </select>&nbsp; &nbsp;
+      
+        
+        <label><b><span style="color:red;">*</span>Session</b></label>
+        <select   id="ssession" [(ngModel)]="searchData.sessionId"  formControlName="ssession">
+          <option [ngValue]="0">Select Session</option>
+          <option *ngFor="let session of activeSessions" [ngValue]="session.sessionId">{{ session.sessionName }}
+          </option>
+        </select> &nbsp; &nbsp;&nbsp;<label for="password"><b>Smester System</b> </label>
+        <input type="checkbox" [(ngModel)]="searchData.isSmesterSystem"   formControlName="isSmesterSystem">&nbsp; &nbsp;
+            <button class="btn btn-secondary">Report</button>&nbsp;&nbsp; <button *ngIf="visible" class="btn btn-secondary" (click)="reportPDF()">PDF</button> &nbsp;&nbsp;<button class="btn btn-secondary" (click)="clear()">Clear</button>
+    </form>
+  </ng-container>
+  
+  
+   <div  class="body" *ngIf="students.length > 0">
+    <form  [formGroup]="myForm" (ngSubmit)="save(students)">
+  <table>
+  <thead >
+    <tr>
+      <th>S.No</th>
+      <th>Name(BOB)-Adhar(BloodGroup)</th>
+      <th>Gardians</th>
+      <th>Subject | Obtain | Maximum</th>
+      <th>Contact</th>
+      <th>class</th>
+      <th>session</th>
+      <th>Active</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+   
+    <tbody>
+    <tr  ng-template *ngFor="let stu of students; let i = index ">
+      <td>{{i+1}}</td>
+      <td>{{stu.name}}({{stu.dob}})-{{stu.adhar}}{{stu.bloodGroup}}</td>
+      <td>{{stu.fatherName}}, {{stu.motherName}}</td>
+      <td><table>
+        <tr *ngFor="let res of stu.result ; let j = index">
+         
+          <td>{{res.subjectName}}</td>
+          <td><input type="text" style="width:70px ;"  [(ngModel)]="res.obtainMark"  formControlName="students[{{i}}].result[{{j}}].Obtained" ></td><td>
+            <input type="text" style="width:70px ;"  [(ngModel)]="res.maxMark"  formControlName="students[{{i}}].result[{{j}}].max"></td></tr></table></td>
+      <td>{{stu.contact1}}, {{stu.contact2}}</td>
+      <td>{{stu.className}}</td>
+      <td>{{stu.sessionName}}</td>
+      <td>{{stu.isActive}}</td>
+      <td><button class="btn btn-secondary" (click)="editStudent(stu,0)">Report</button></td>
+      
+    </tr>
+    <tr><td colspan="9"> <button class="btn btn-secondary">Save</button></td></tr>
+   </tbody>
+  
+  </table>
+</form>
+  </div>
+  

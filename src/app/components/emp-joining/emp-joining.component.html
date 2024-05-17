@@ -1,0 +1,73 @@
+
+<div>
+ 
+  <ng-container>
+    <ng-container *ngIf="visible">
+     
+      
+      <div style="padding: 60px;" id="report" >
+        
+        <div ng-template>
+          <div class="header" style="background-color:#DAF7A6; height:  100px;">
+            <img src="assets/school.png" alt="logo" style="background-color:#DAF7A6;"/>
+            <h4><b>{{orgname}} ({{orgaddress}})</b></h4>
+            
+          </div>
+          <div style="padding-top: 20px;"><p style="color:black;font-size:30px;text-align: center;"> <b><u>Joining letter</u></b></p></div>
+        <div style="padding: 60px;">
+          <p style="color:black;font-size:18px;text-align: left;font-weight: bold;"> <span *ngIf="employee.gender=='Male'"> Mr.</span> <span *ngIf="employee.gender!='Male'"> Miss. </span>  <span> {{employee.name}}</span>, <span *ngIf="employee.gender=='Male'"> son</span> <span *ngIf="employee.gender!='Male'"> daughter</span> of Mr. <span>{{employee.fatherName}}</span>, <br> {{employee.currentAddress}}</p>
+          <P style="color:black;font-size:18px;text-align: left;font-weight: bold;">Dear {{employee.name}},</P>
+      <p>With reference to your application and subsequent interviews, we are happy to announce your joining at our
+       {{orgname}}, as per particulars mentioned herein below and subject to the terms of the “Service Agreement”
+        signed and accepted by you:</p>
+        <P style="color:black;font-size:18px;text-align: left;font-weight: bold;">1. Your designation will be {{employee.postName}} and your duties and responsibilities will be such as may be assigned<br>
+          to you from time to time. <br>        
+          2. You normal place of work will be {{orgaddress}}.<br>
+          3. Your date of joining will be {{employee.joinDate}}.</P>
+          <p><b>Please return the duplicate copy of this letter duly signed as an unconditional and complete acceptance of the
+            above terms and conditions.</b></p>
+            
+           <p> Welcoming you to this school.</p>
+        </div>
+     
+          <div>&nbsp;</div>
+         
+              <p> <b>Sign and Stamp </b></p>
+               
+              
+              
+          <div>&nbsp;</div>
+          <footer>
+            <p><b>
+              Email :{{orgemail}} &nbsp;   Contact : {{contact}},{{contact2}}</b>
+            </p>
+          </footer>
+          <div>&nbsp;</div>
+        </div>
+      </div>
+      
+    </ng-container>
+    
+    <form  [formGroup]="searchForm"  style="padding: 30px;">
+      <div style="padding: 10px;"><b>Generate employee Joining letter.</b></div>
+        <label><b><span style="color:red;">*</span></b>Post</label>
+        <select   id="postId" [(ngModel)]="searchData.postId"  formControlName="postId" (change)='employeeList()' >
+          <option [ngValue]="0">Select Post</option>
+          <option *ngFor="let post of activePosts" [ngValue]="post.postId">{{ post.postName }}
+          </option>
+        </select>&nbsp; &nbsp;
+           
+            <label><b><span style="color:red;">*</span></b>Employee </label>
+            <select   id="employeeId" [(ngModel)]="searchData.employeeId"  formControlName="employeeId" (change)="character()">
+                <option [ngValue]="0">Select Employee</option>
+                <option *ngFor="let emp of employees" [ngValue]="emp.empId">{{ emp.name }}-{{ emp.dob }} -{{ emp.adhar }}
+                </option>
+              </select>&nbsp; &nbsp; &nbsp;
+              <button *ngIf="visible" class="btn btn-secondary" (click)="reportPDF()">PDF</button>
+              &nbsp;&nbsp;<button class="btn btn-secondary" (click)="clear()">Clear</button>
+          </form>
+           
+  </ng-container>
+  
+  
+  
